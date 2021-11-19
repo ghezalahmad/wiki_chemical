@@ -8,7 +8,7 @@ from tabulate import tabulate
 wiki_wiki = wikipediaapi.Wikipedia('en')
 while True:
     try:
-        chemical = input("Write the name of entity: \n")
+        chemical = input("Write the name of entity: ")
         page_py = wiki_wiki.page(chemical)
         sumary = page_py.summary[0:]
 
@@ -18,7 +18,7 @@ while True:
         cumul_sent_list = [sent_list[0], ' '.join(sent_list[:2]), ' '.join(sent_list)]
 
         df = pd.DataFrame({'Entity': chemical, 'Description': cumul_sent_list})
-        df["Sentences"] = pd.Series([f"Sentence1-{i+1}" for i in range(len(cumul_sent_list))]) # replace "Sentence{i+1}" with "Sentence1-{i+1}" if cumulating
+        df["Sentences"] = pd.Series([f"Sentence1-{i+1}" for i in range(len(cumul_sent_list))])
         df = df.pivot(index="Entity", columns="Sentences", values="Description")
 
           #for col1,col2 in zip(text1, text2):
